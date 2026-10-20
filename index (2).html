@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misi Snek Sihat: Juara Pilihan Berkhasiat</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Quicksand for fun child-friendly typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+            touch-action: manipulation;
+        }
+        h1, h2, h3, .font-fun {
+            font-family: 'Fredoka', cursive;
+        }
+        
+        /* Custom Keyframe Animations */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-5px); }
+            50% { transform: translateY(5px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-grow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-grow {
+            animation: pulse-grow 2s infinite ease-in-out;
+        }
+
+        @keyframes drop-into-basket {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            50% { transform: scale(0.6) translateY(120px) rotate(15deg); opacity: 0.8; }
+            100% { transform: scale(0.2) translateY(220px) rotate(30deg); opacity: 0; }
+        }
+        .animate-drop {
+            animation: drop-into-basket 0.8s forwards ease-in;
+        }
+
+        /* Glassmorphism Card Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Custom Interactive Buttons */
+        .btn-game {
+            transition: all 0.15s ease;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+        }
+        .btn-game:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+        }
+        .btn-game:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+        }
+
+        /* Hide scrollbars for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between p-3 sm:p-6 select-none overflow-x-hidden">
+
+    <!-- TOP HEADER / NAV BAR -->
+    <header class="max-w-4xl w-full mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md p-3 sm:p-4 rounded-3xl shadow-md border-2 border-emerald-200 mb-4">
+        <div class="flex items-center space-x-3">
+            <div class="bg-emerald-500 text-white p-2.5 rounded-2xl shadow-inner text-xl sm:text-2xl">
+                🍎
+            </div>
+            <div>
+                <h1 class="text-base sm:text-xl font-bold text-emerald-800 leading-tight">MISI SNEK SIHAT</h1>
+                <p class="text-xs sm:text-sm text-emerald-600 font-semibold">Tahun 3 Pendidikan Kesihatan</p>
+            </div>
+        </div>
+
+        <!-- Score & Mute Controls -->
+        <div class="flex items-center space-x-2 sm:space-x-4">
+            <div class="bg-amber-100 border-2 border-amber-300 px-3 py-1.5 rounded-full flex items-center space-x-1.5 shadow-sm">
+                <span class="text-amber-500 text-lg">⭐</span>
+                <span id="global-score" class="font-fun text-lg sm:text-xl text-amber-800 font-bold">0</span>
+            </div>
+            <button id="audio-toggle" onclick="toggleAudio()" class="w-10 h-10 sm:w-11 sm:h-11 bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-full flex items-center justify-center text-slate-600 transition">
+                <i id="audio-icon" class="fas fa-volume-up text-base sm:text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER FOR SCREEN PAGES -->
+    <main class="max-w-4xl w-full mx-auto flex-grow flex items-center justify-center relative">
+
+        <!-- 1. HALAMAN UTAMA (HOME) -->
+        <section id="screen-home" class="w-full glass-card rounded-3xl p-6 sm:p-10 text-center flex flex-col items-center justify-center border-4 border-emerald-300">
+            <div class="relative mb-6">
+                <div class="text-7xl sm:text-9xl animate-bounce-slow filter drop-shadow-md">🧺</div>
+                <div class="absolute -bottom-2 -right-2 text-4xl sm:text-6xl animate-pulse-grow">🍎</div>
+                <div class="absolute -top-2 -left-2 text-4xl sm:text-6xl animate-pulse-grow" style="animation-delay: 0.5s;">🍌</div>
+            </div>
+
+            <span class="bg-emerald-100 text-emerald-800 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-3 border border-emerald-300">
+                Unit 8: Pemakanan Sihat & Selamat
+            </span>
+
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-emerald-700 mb-2 leading-tight">
+                🍎 MISI SNEK SIHAT 🍌
+            </h1>
+            <p class="text-lg sm:text-2xl font-bold text-amber-600 mb-6 font-fun">
+                "Jadilah Juara Pilihan Berkhasiat!"
+            </p>
+
+            <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 max-w-md w-full mb-8 text-slate-700 text-sm sm:text-base">
+                <p class="font-bold text-emerald-900 mb-1">👋 Hai Kawan-kawan!</p>
+                <p>Bantu isi bakul makanan dengan snek yang berkhasiat untuk kekal sihat dan bertenaga!</p>
+            </div>
+
+            <button onclick="startGame()" class="btn-game bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-fun text-xl sm:text-2xl px-10 py-4 rounded-2xl font-bold flex items-center space-x-3 border-b-4 border-emerald-800">
+                <span>▶ MULA MISI</span>
+                <i class="fas fa-arrow-right text-lg"></i>
+            </button>
+        </section>
+
+        <!-- 2. MISI 1 – KENALI SNEK -->
+        <section id="screen-misi1" class="hidden w-full glass-card rounded-3xl p-4 sm:p-8 border-4 border-sky-300 flex-col">
+            <!-- Header Bar Misi 1 -->
+            <div class="flex flex-col sm:flex-row justify-between items-center border-b-2 border-sky-100 pb-4 mb-4 gap-2">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-sky-700 font-fun flex items-center gap-2">
+                        <span>🕵️</span> MISI 1: KENALI SNEK
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600">Klik makanan yang merupakan snek berkhasiat!</p>
+                </div>
+                <div class="bg-sky-100 px-4 py-1.5 rounded-full text-sky-800 font-bold text-sm border border-sky-200">
+                    Soalan <span id="misi1-idx">1</span> daripada <span id="misi1-total">5</span>
+                </div>
+            </div>
+
+            <!-- Card Soalan -->
+            <div class="flex-grow flex flex-col justify-center items-center py-2">
+                <h3 id="misi1-question" class="text-lg sm:text-2xl font-bold text-slate-800 text-center mb-6 max-w-xl font-fun">
+                    Mana satu snek berkhasiat?
+                </h3>
+
+                <!-- Pilihan Jawapan -->
+                <div id="misi1-options" class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl mb-6">
+                    <!-- Dynamic Options Inserted Here -->
+                </div>
+
+                <!-- Feedback Message Container -->
+                <div id="misi1-feedback" class="hidden w-full max-w-xl p-4 rounded-2xl text-center font-bold text-base sm:text-lg mb-4 transition-all">
+                </div>
+            </div>
+
+            <!-- Footer Next Button -->
+            <div class="flex justify-end pt-2">
+                <button id="misi1-next-btn" onclick="nextMisi1Question()" class="hidden btn-game bg-sky-500 hover:bg-sky-600 text-white font-fun text-lg px-8 py-3 rounded-xl font-bold border-b-4 border-sky-700">
+                    Seterusnya <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. MISI 2 – ISI BAKUL SIHAT -->
+        <section id="screen-misi2" class="hidden w-full glass-card rounded-3xl p-4 sm:p-8 border-4 border-amber-300 flex-col">
+            <div class="flex flex-col sm:flex-row justify-between items-center border-b-2 border-amber-100 pb-4 mb-4 gap-2">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-amber-700 font-fun flex items-center gap-2">
+                        <span>🛒</span> MISI 2: ISI BAKUL SIHAT
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600">Bandingkan dan pilih snek yang lebih berkhasiat!</p>
+                </div>
+                <div class="bg-amber-100 px-4 py-1.5 rounded-full text-amber-800 font-bold text-sm border border-amber-200">
+                    Pasangan <span id="misi2-idx">1</span> / <span id="misi2-total">5</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center py-2">
+                <!-- Two Choice Cards -->
+                <div class="md:col-span-2 flex flex-col items-center">
+                    <p class="text-base sm:text-lg font-bold text-slate-700 mb-4 font-fun text-center">
+                        Pilih snek yang lebih sihat untuk dimasukkan ke dalam bakul:
+                    </p>
+                    <div id="misi2-pairs" class="grid grid-cols-2 gap-4 w-full max-w-md">
+                        <!-- Dynamic Pairs inserted here -->
+                    </div>
+                    <div id="misi2-feedback" class="hidden w-full max-w-md mt-4 p-3 rounded-xl text-center font-bold text-sm sm:text-base"></div>
+                </div>
+
+                <!-- Visual Bakul Snek -->
+                <div class="bg-amber-50/80 border-2 border-amber-200 rounded-2xl p-4 flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden">
+                    <span class="text-xs font-bold text-amber-800 bg-amber-200/80 px-3 py-1 rounded-full mb-2">Bakul Snek Anda</span>
+                    <div class="text-6xl sm:text-7xl my-2 relative">
+                        🧺
+                    </div>
+                    <!-- Items Inside Basket Collection -->
+                    <div id="basket-items" class="flex flex-wrap justify-center gap-1.5 max-w-[200px] min-h-[40px] p-2 bg-amber-100/60 rounded-xl border border-amber-300">
+                        <span class="text-xs text-amber-600 font-semibold italic self-center text-center w-full" id="basket-empty-tip">Masih kosong...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-4">
+                <button id="misi2-next-btn" onclick="nextMisi2Question()" class="hidden btn-game bg-amber-500 hover:bg-amber-600 text-white font-fun text-lg px-8 py-3 rounded-xl font-bold border-b-4 border-amber-700">
+                    Seterusnya <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 4. MISI 3 – PILIHAN BIJAK (KBAT / SENARIO) -->
+        <section id="screen-misi3" class="hidden w-full glass-card rounded-3xl p-4 sm:p-8 border-4 border-purple-300 flex-col">
+            <div class="border-b-2 border-purple-100 pb-4 mb-4">
+                <h2 class="text-xl sm:text-2xl font-bold text-purple-700 font-fun flex items-center gap-2">
+                    <span>🧠</span> MISI 3: PILIHAN BIJAK
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600">Fikir dan bantu rakan membuat keputusan yang betul!</p>
+            </div>
+
+            <!-- Scenario Box -->
+            <div class="bg-purple-50 border-2 border-purple-200 p-4 sm:p-5 rounded-2xl mb-6">
+                <span class="text-xs font-bold text-purple-700 bg-purple-200 px-3 py-1 rounded-full uppercase tracking-wide">Situasi</span>
+                <p id="misi3-scenario-text" class="text-base sm:text-lg font-bold text-purple-950 mt-2">
+                    <!-- Scenario text -->
+                </p>
+            </div>
+
+            <!-- Step A: Choose Snack -->
+            <div id="misi3-stepA" class="space-y-4">
+                <h3 id="misi3-qA-text" class="text-base sm:text-xl font-bold text-slate-800 font-fun">
+                    Apakah pilihan snek yang PALING sesuai?
+                </h3>
+                <div id="misi3-optionsA" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- Options inserted here -->
+                </div>
+            </div>
+
+            <!-- Step B: Reason (Hidden initially) -->
+            <div id="misi3-stepB" class="hidden space-y-4 mt-6 pt-4 border-t-2 border-purple-100">
+                <h3 class="text-base sm:text-xl font-bold text-slate-800 font-fun">
+                    💡 Kenapa kamu memilih snek berkhasiat itu?
+                </h3>
+                <div id="misi3-optionsB" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Reason Options -->
+                </div>
+            </div>
+
+            <div id="misi3-feedback" class="hidden mt-4 p-4 rounded-2xl text-center font-bold text-base"></div>
+
+            <div class="flex justify-end pt-4">
+                <button id="misi3-next-btn" onclick="finishMisi3()" class="hidden btn-game bg-purple-600 hover:bg-purple-700 text-white font-fun text-lg px-8 py-3 rounded-xl font-bold border-b-4 border-purple-800">
+                    Teruskan ke Misi 4 <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. MISI 4 – CABARAN JUARA (PADANAN MANFAAT) -->
+        <section id="screen-misi4" class="hidden w-full glass-card rounded-3xl p-4 sm:p-8 border-4 border-rose-300 flex-col">
+            <div class="border-b-2 border-rose-100 pb-4 mb-4">
+                <h2 class="text-xl sm:text-2xl font-bold text-rose-700 font-fun flex items-center gap-2">
+                    <span>⚡</span> MISI 4: CABARAN JUARA
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600">Padankan snek berkhasiat dengan manfaat utamanya!</p>
+            </div>
+
+            <div id="misi4-container" class="space-y-4 py-2">
+                <!-- Dynamic Matching Questions -->
+            </div>
+
+            <div id="misi4-feedback" class="hidden mt-4 p-4 rounded-2xl text-center font-bold text-base"></div>
+
+            <div class="flex justify-end pt-4">
+                <button id="misi4-finish-btn" onclick="showResults()" class="hidden btn-game bg-rose-500 hover:bg-rose-600 text-white font-fun text-lg px-8 py-3 rounded-xl font-bold border-b-4 border-rose-700">
+                    Lihat Keputusan 🎉
+                </button>
+            </div>
+        </section>
+
+        <!-- 6. HALAMAN TAMAT / TAHNIAH -->
+        <section id="screen-results" class="hidden w-full glass-card rounded-3xl p-6 sm:p-10 border-4 border-emerald-400 text-center flex-col items-center">
+            <div class="text-6xl sm:text-8xl animate-bounce-slow mb-2">🏆</div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-emerald-800 font-fun mb-1">
+                TAHNIAH! ANDA JUARA SNEK SIHAT!
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base font-semibold mb-6">
+                Anda telah berjaya menyelesaikan semua misi dengan cemerlang!
+            </p>
+
+            <!-- Digital Certificate Card -->
+            <div class="w-full max-w-lg bg-gradient-to-br from-amber-50 to-emerald-50 border-4 border-amber-300 rounded-3xl p-6 shadow-md relative mb-6">
+                <div class="absolute top-3 right-3 text-3xl">🏅</div>
+                <p class="text-xs text-amber-800 font-bold tracking-widest uppercase mb-1">Sijil Penghargaan Digital</p>
+                <h3 class="text-xl sm:text-2xl font-bold text-emerald-900 font-fun mb-3">Pendidikan Kesihatan Tahun 3</h3>
+                
+                <div class="my-4 py-3 bg-white/80 rounded-2xl border border-emerald-200">
+                    <p class="text-xs text-slate-500">Jumlah Skor Dikumpul</p>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-amber-500 font-fun my-1">
+                        <span id="final-score">0</span> / 15 ⭐
+                    </p>
+                    <p id="final-badge" class="text-sm font-bold text-emerald-700">Pakar Pemakanan Muda!</p>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-700 italic">
+                    "Ingat! Sentiasa utamakan snek berkhasiat untuk badan yang cergas dan otak yang cerdas!"
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md">
+                <button onclick="restartGame()" class="btn-game bg-emerald-500 hover:bg-emerald-600 text-white font-fun text-xl px-8 py-3.5 rounded-2xl font-bold flex items-center justify-center space-x-2 border-b-4 border-emerald-700 w-full">
+                    <i class="fas fa-redo"></i>
+                    <span>MAIN SEMULA</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="max-w-4xl w-full mx-auto text-center mt-4 text-xs text-emerald-800/70 font-semibold">
+        <p>Aplikasi Pembelajaran Digital Pendidikan Kesihatan SK 8.1 - Amalan Pemakanan Sihat dan Selamat</p>
+    </footer>
+
+    <script>
+        /* --- AUDIO ENGINE (Web Audio API - No External Sound Files Needed) --- */
+        let audioEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const icon = document.getElementById('audio-icon');
+            if (audioEnabled) {
+                icon.className = 'fas fa-volume-up text-base sm:text-lg';
+            } else {
+                icon.className = 'fas fa-volume-mute text-base sm:text-lg text-rose-500';
+            }
+        }
+
+        function playSound(type) {
+            if (!audioEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                const now = ctx.currentTime;
+
+                if (type === 'correct') {
+                    // Upbeat arpeggio sound
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                    osc.start(now);
+                    osc.stop(now + 0.5);
+                } else if (type === 'wrong') {
+                    // Low gentle error sound
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now); // A3
+                    osc.frequency.setValueAtTime(180, now + 0.15);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                    osc.start(now);
+                    osc.stop(now + 0.4);
+                } else if (type === 'click') {
+                    // Soft pop
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(400, now);
+                    osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                }
+            } catch(e) {
+                console.log("Audio play error", e);
+            }
+        }
+
+        /* --- GAME STATE VARIABLES --- */
+        let totalScore = 0;
+        let misi1Questions = [];
+        let misi1Index = 0;
+
+        let misi2Questions = [];
+        let misi2Index = 0;
+
+        let currentScenario = null;
+        let misi3StepASelected = null;
+
+        let misi4Questions = [];
+        let misi4Answers = {};
+
+        /* --- QUESTION BANK DATASETS (Extensive & Randomized) --- */
+
+        // MISI 1 BANK (10 items - system picks 5)
+        const MISI1_BANK = [
+            {
+                question: "Yang manakah snek yang berkhasiat?",
+                options: [
+                    { name: "🍎 Epal", healthy: true },
+                    { name: "🍩 Donat Coklat", healthy: false },
+                    { name: "🍭 Gula-gula Lolipop", healthy: false }
+                ]
+            },
+            {
+                question: "Pilih snek yang memberikan vitamin dan tenaga sihat.",
+                options: [
+                    { name: "🍌 Pisang", healthy: true },
+                    { name: "🍟 Kentang Goreng", healthy: false },
+                    { name: "🧁 Kek Krim Manis", healthy: false }
+                ]
+            },
+            {
+                question: "Antara berikut, manakah pilihan snek berkhasiat yang baik?",
+                options: [
+                    { name: "🌽 Jagung Rebus", healthy: true },
+                    { name: "🥤 Minuman Berkarbonat", healthy: false },
+                    { name: "🍿 Popcorn Bergula Tinggi", healthy: false }
+                ]
+            },
+            {
+                question: "Pilih snek protein yang sesuai untuk pembesaran.",
+                options: [
+                    { name: "🥚 Telur Rebus", healthy: true },
+                    { name: "🍦 Ais Krim Kraf", healthy: false },
+                    { name: "🍢 Nuggets Goreng", healthy: false }
+                ]
+            },
+            {
+                question: "Yang manakah pilihan snek yang lebih mesra kesihatan?",
+                options: [
+                    { name: "🥛 Yogurt Rendah Gula", healthy: true },
+                    { name: "🍫 Coklat Manis", healthy: false },
+                    { name: "🍬 Gula-gula Getah", healthy: false }
+                ]
+            },
+            {
+                question: "Antara berikut, yang manakah snek buah kering berkhasiat?",
+                options: [
+                    { name: "🍇 Kismis", healthy: true },
+                    { name: "🍪 Biskut Berperisa Tiruan", healthy: false },
+                    { name: "🍫 Coklat Bar", healthy: false }
+                ]
+            },
+            {
+                question: "Pilih buah-buahan berserat tinggi sebagai snek.",
+                options: [
+                    { name: "🍉 Tembikai Segar", healthy: true },
+                    { name: "🍩 Donat Glaze", healthy: false },
+                    { name: "🥔 Keropok Kentang Bag", healthy: false }
+                ]
+            },
+            {
+                question: "Snek mana yang kaya dengan serat dan protein?",
+                options: [
+                    { name: "🥜 Kacang Rebus", healthy: true },
+                    { name: "🍭 Gula-gula Berwarna", healthy: false },
+                    { name: "🥤 Minuman Bergas", healthy: false }
+                ]
+            },
+            {
+                question: "Pilih sandwich sihat untuk alas perut.",
+                options: [
+                    { name: "🥪 Sandwich Roti Oat", healthy: true },
+                    { name: "🍿 Popcorn Bergula", healthy: false },
+                    { name: "🧁 Kek Cawan Manis", healthy: false }
+                ]
+            },
+            {
+                question: "Manakah pilihan snek tempatan yang berkhasiat?",
+                options: [
+                    { name: "🥭 Betik Potong", healthy: true },
+                    { name: "🍪 Biskut Tinggi Gula", healthy: false },
+                    { name: "🍟 Kentang Goreng Garam", healthy: false }
+                ]
+            }
+        ];
+
+        // MISI 2 BANK (10 pairs - system picks 5)
+        const MISI2_BANK = [
+            { healthy: { name: "Epal", icon: "🍎" }, unhealthy: { name: "Donat", icon: "🍩" } },
+            { healthy: { name: "Jagung Rebus", icon: "🌽" }, unhealthy: { name: "Gula-gula", icon: "🍭" } },
+            { healthy: { name: "Telur Rebus", icon: "🥚" }, unhealthy: { name: "Kentang Goreng", icon: "🍟" } },
+            { healthy: { name: "Pisang", icon: "🍌" }, unhealthy: { name: "Kek Krim", icon: "🧁" } },
+            { healthy: { name: "Yogurt Rendah Gula", icon: "🥛" }, unhealthy: { name: "Coklat Bar", icon: "🍫" } },
+            { healthy: { name: "Kismis", icon: "🍇" }, unhealthy: { name: "Minuman Bergas", icon: "🥤" } },
+            { healthy: { name: "Kacang Rebus", icon: "🥜" }, unhealthy: { name: "Keropok Kentang", icon: "🥔" } },
+            { healthy: { name: "Sandwich Roti Oat", icon: "🥪" }, unhealthy: { name: "Ais Krim Manis", icon: "🍦" } },
+            { healthy: { name: "Tembikai Segar", icon: "🍉" }, unhealthy: { name: "Biskut Manis", icon: "🍪" } },
+            { healthy: { name: "Roti Gandum Penuh", icon: "🍞" }, unhealthy: { name: "Sosis Bergoreng", icon: "🌭" } }
+        ];
+
+        // MISI 3 SCENARIOS
+        const MISI3_SCENARIOS = [
+            {
+                text: "Aiman baru selesai melakukan aktiviti Pendidikan Jasmani di padang. Dia berasa dahaga dan lapar serta ingin memilih snek untuk mengembalikan tenaga.",
+                questionA: "Apakah pilihan snek yang PALING sesuai untuk Aiman?",
+                optionsA: [
+                    { name: "🍌 Pisang / 🍎 Epal", healthy: true },
+                    { name: "🍩 Donat Coklat", healthy: false },
+                    { name: "🍭 Gula-gula Lolipop", healthy: false },
+                    { name: "🥔 Keropok Kentang", healthy: false }
+                ]
+            },
+            {
+                text: "Siti sedang belajar di rumah pada waktu petang. Dia mahukan snek ringkas yang berkhasiat untuk kekal fokus dan bertenaga.",
+                questionA: "Apakah pilihan snek yang PALING sesuai untuk Siti?",
+                optionsA: [
+                    { name: "🥛 Yogurt / 🍇 Kismis", healthy: true },
+                    { name: "🍦 Ais Krim Manis", healthy: false },
+                    { name: "🍟 Kentang Goreng", healthy: false },
+                    { name: "🥤 Minuman Berkarbonat", healthy: false }
+                ]
+            },
+            {
+                text: "Maniam ingin membawa snek berkhasiat dari rumah ke sekolah untuk dimakan sewaktu waktu rehat.",
+                questionA: "Apakah pilihan snek yang PALING sesuai untuk Maniam?",
+                optionsA: [
+                    { name: "🥪 Sandwich Roti Oat / 🥚 Telur Rebus", healthy: true },
+                    { name: "🧁 Kek Cawan Manis", healthy: false },
+                    { name: "🍬 Gula-gula Getah", healthy: false },
+                    { name: "🌭 Sosis Bergoreng Minyak", healthy: false }
+                ]
+            }
+        ];
+
+        // MISI 4 MATCHING DATA
+        const MISI4_BANK = [
+            {
+                id: "q1",
+                desc: "Snek yang kaya dengan vitamin dan serat untuk penghadaman yang baik:",
+                correct: "Buah-buahan (Epal / Tembikai / Pisang)",
+                options: [
+                    "Buah-buahan (Epal / Tembikai / Pisang)",
+                    "Minuman Berkarbonat",
+                    "Keropok Kentang Masin"
+                ]
+            },
+            {
+                id: "q2",
+                desc: "Snek yang membekalkan protein untuk pembesaran otot dan tubuh:",
+                correct: "Telur Rebus / Kacang Rebus",
+                options: [
+                    "Gula-gula Lolipop",
+                    "Telur Rebus / Kacang Rebus",
+                    "Ais Krim Manis"
+                ]
+            },
+            {
+                id: "q3",
+                desc: "Snek yang membekalkan kalsium untuk tulang dan gigi yang kuat:",
+                correct: "Yogurt Rendah Gula / Susu Segar",
+                options: [
+                    "Donat Coklat Glaze",
+                    "Keropok Lekor Bergoreng",
+                    "Yogurt Rendah Gula / Susu Segar"
+                ]
+            }
+        ];
+
+        /* --- HELPER UTILITIES --- */
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function updateScore(points) {
+            totalScore += points;
+            document.getElementById('global-score').innerText = totalScore;
+        }
+
+        function switchScreen(screenId) {
+            playSound('click');
+            const screens = ['screen-home', 'screen-misi1', 'screen-misi2', 'screen-misi3', 'screen-misi4', 'screen-results'];
+            screens.forEach(s => {
+                const el = document.getElementById(s);
+                if (s === screenId) {
+                    el.classList.remove('hidden');
+                    el.classList.add('flex');
+                } else {
+                    el.classList.add('hidden');
+                    el.classList.remove('flex');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* --- GAME FLOW & LOGIC --- */
+
+        function startGame() {
+            totalScore = 0;
+            document.getElementById('global-score').innerText = totalScore;
+            
+            // Reset Basket
+            document.getElementById('basket-items').innerHTML = '<span class="text-xs text-amber-600 font-semibold italic self-center text-center w-full" id="basket-empty-tip">Masih kosong...</span>';
+
+            // Init Misi 1
+            misi1Questions = shuffleArray(MISI1_BANK).slice(0, 5);
+            misi1Index = 0;
+            
+            loadMisi1Question();
+            switchScreen('screen-misi1');
+        }
+
+        /* --- MISI 1 LOGIC --- */
+        function loadMisi1Question() {
+            const q = misi1Questions[misi1Index];
+            document.getElementById('misi1-idx').innerText = misi1Index + 1;
+            document.getElementById('misi1-total').innerText = misi1Questions.length;
+            document.getElementById('misi1-question').innerText = q.question;
+
+            const optionsContainer = document.getElementById('misi1-options');
+            optionsContainer.innerHTML = '';
+
+            const feedback = document.getElementById('misi1-feedback');
+            feedback.className = 'hidden w-full max-w-xl p-4 rounded-2xl text-center font-bold text-base sm:text-lg mb-4';
+            document.getElementById('misi1-next-btn').classList.add('hidden');
+
+            const shuffledOptions = shuffleArray(q.options);
+
+            shuffledOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'misi1-opt-btn btn-game bg-white hover:bg-sky-50 border-3 border-sky-200 hover:border-sky-400 p-4 rounded-2xl text-slate-800 font-bold text-base sm:text-lg flex flex-col items-center justify-center gap-2 shadow-sm transition';
+                btn.innerHTML = `
+                    <span class="text-3xl sm:text-4xl mb-1">${opt.name.split(' ')[0]}</span>
+                    <span>${opt.name.split(' ').slice(1).join(' ')}</span>
+                `;
+                btn.onclick = () => checkMisi1Answer(opt, btn, shuffledOptions);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkMisi1Answer(selectedOpt, clickedBtn, allOpts) {
+            playSound('click');
+            const feedback = document.getElementById('misi1-feedback');
+            feedback.classList.remove('hidden');
+
+            // Disable all option buttons
+            const allBtns = document.querySelectorAll('.misi1-opt-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (selectedOpt.healthy) {
+                playSound('correct');
+                updateScore(1);
+                clickedBtn.classList.remove('bg-white', 'border-sky-200');
+                clickedBtn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                
+                feedback.className = 'w-full max-w-xl p-4 rounded-2xl text-center font-bold text-base sm:text-lg mb-4 bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerHTML = `🎉 Betul! <b>${selectedOpt.name}</b> ialah snek yang berkhasiat! (+1 ⭐)`;
+            } else {
+                playSound('wrong');
+                clickedBtn.classList.remove('bg-white', 'border-sky-200');
+                clickedBtn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-900');
+
+                const correctOpt = allOpts.find(o => o.healthy);
+                feedback.className = 'w-full max-w-xl p-4 rounded-2xl text-center font-bold text-base sm:text-lg mb-4 bg-amber-100 text-amber-900 border-2 border-amber-300';
+                feedback.innerHTML = `💡 Cuba lagi! <b>${correctOpt.name}</b> ialah pilihan snek yang lebih berkhasiat.`;
+            }
+
+            document.getElementById('misi1-next-btn').classList.remove('hidden');
+        }
+
+        function nextMisi1Question() {
+            misi1Index++;
+            if (misi1Index < misi1Questions.length) {
+                loadMisi1Question();
+            } else {
+                // Move to Misi 2
+                misi2Questions = shuffleArray(MISI2_BANK).slice(0, 5);
+                misi2Index = 0;
+                loadMisi2Question();
+                switchScreen('screen-misi2');
+            }
+        }
+
+        /* --- MISI 2 LOGIC --- */
+        function loadMisi2Question() {
+            const pair = misi2Questions[misi2Index];
+            document.getElementById('misi2-idx').innerText = misi2Index + 1;
+            document.getElementById('misi2-total').innerText = misi2Questions.length;
+
+            const pairsContainer = document.getElementById('misi2-pairs');
+            pairsContainer.innerHTML = '';
+
+            const feedback = document.getElementById('misi2-feedback');
+            feedback.className = 'hidden w-full max-w-md mt-4 p-3 rounded-xl text-center font-bold text-sm sm:text-base';
+            document.getElementById('misi2-next-btn').classList.add('hidden');
+
+            // Randomize order of healthy vs unhealthy
+            const options = shuffleArray([
+                { ...pair.healthy, isHealthy: true },
+                { ...pair.unhealthy, isHealthy: false }
+            ]);
+
+            options.forEach(opt => {
+                const card = document.createElement('button');
+                card.className = 'misi2-opt-card btn-game bg-white hover:bg-amber-50 border-3 border-amber-200 hover:border-amber-400 p-4 rounded-2xl flex flex-col items-center justify-center text-center transition';
+                card.innerHTML = `
+                    <span class="text-4xl sm:text-5xl mb-2 flex-icon">${opt.icon}</span>
+                    <span class="font-bold text-slate-800 text-sm sm:text-base">${opt.name}</span>
+                `;
+                card.onclick = () => checkMisi2Answer(opt, card);
+                pairsContainer.appendChild(card);
+            });
+        }
+
+        function checkMisi2Answer(selected, clickedCard) {
+            playSound('click');
+            const feedback = document.getElementById('misi2-feedback');
+            feedback.classList.remove('hidden');
+
+            const allCards = document.querySelectorAll('.misi2-opt-card');
+            allCards.forEach(c => c.disabled = true);
+
+            if (selected.isHealthy) {
+                playSound('correct');
+                updateScore(1);
+
+                clickedCard.classList.remove('bg-white', 'border-amber-200');
+                clickedCard.classList.add('bg-emerald-100', 'border-emerald-500');
+
+                // Animate drop into basket
+                const iconSpan = clickedCard.querySelector('.flex-icon');
+                if (iconSpan) {
+                    iconSpan.classList.add('animate-drop');
+                }
+
+                // Add item to basket UI
+                setTimeout(() => {
+                    const emptyTip = document.getElementById('basket-empty-tip');
+                    if (emptyTip) emptyTip.remove();
+
+                    const basketContainer = document.getElementById('basket-items');
+                    const badge = document.createElement('span');
+                    badge.className = 'bg-white border border-emerald-300 text-emerald-800 text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm animate-bounce-slow';
+                    badge.innerHTML = `${selected.icon} ${selected.name}`;
+                    basketContainer.appendChild(badge);
+                }, 400);
+
+                feedback.className = 'w-full max-w-md mt-4 p-3 rounded-xl text-center font-bold text-sm sm:text-base bg-emerald-100 text-emerald-900 border border-emerald-300';
+                feedback.innerHTML = `🎉 Syabas! <b>${selected.name}</b> dimasukkan ke dalam bakul sihat! (+1 ⭐)`;
+            } else {
+                playSound('wrong');
+                clickedCard.classList.remove('bg-white', 'border-amber-200');
+                clickedCard.classList.add('bg-rose-100', 'border-rose-400');
+
+                feedback.className = 'w-full max-w-md mt-4 p-3 rounded-xl text-center font-bold text-sm sm:text-base bg-amber-100 text-amber-900 border border-amber-300';
+                feedback.innerHTML = `💡 Cuba fikir semula. Pilihan yang satu lagi lebih berkhasiat untuk badan!`;
+            }
+
+            document.getElementById('misi2-next-btn').classList.remove('hidden');
+        }
+
+        function nextMisi2Question() {
+            misi2Index++;
+            if (misi2Index < misi2Questions.length) {
+                loadMisi2Question();
+            } else {
+                // Move to Misi 3
+                setupMisi3();
+                switchScreen('screen-misi3');
+            }
+        }
+
+        /* --- MISI 3 LOGIC --- */
+        function setupMisi3() {
+            currentScenario = MISI3_SCENARIOS[Math.floor(Math.random() * MISI3_SCENARIOS.length)];
+            document.getElementById('misi3-scenario-text').innerText = currentScenario.text;
+            document.getElementById('misi3-qA-text').innerText = currentScenario.questionA;
+
+            const optsA = document.getElementById('misi3-optionsA');
+            optsA.innerHTML = '';
+
+            document.getElementById('misi3-stepB').classList.add('hidden');
+            document.getElementById('misi3-feedback').classList.add('hidden');
+            document.getElementById('misi3-next-btn').classList.add('hidden');
+
+            const shuffledA = shuffleArray(currentScenario.optionsA);
+
+            shuffledA.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'misi3-optA-btn btn-game bg-white hover:bg-purple-50 border-2 border-purple-200 p-3 rounded-xl text-slate-800 font-bold text-sm sm:text-base text-center transition';
+                btn.innerText = opt.name;
+                btn.onclick = () => selectMisi3StepA(opt, btn);
+                optsA.appendChild(btn);
+            });
+        }
+
+        function selectMisi3StepA(selectedOpt, btn) {
+            playSound('click');
+            const allBtns = document.querySelectorAll('.misi3-optA-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            misi3StepASelected = selectedOpt;
+
+            if (selectedOpt.healthy) {
+                playSound('correct');
+                updateScore(1);
+                btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+            } else {
+                playSound('wrong');
+                btn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-900');
+            }
+
+            // Reveal Step B Reason
+            setupMisi3StepB();
+        }
+
+        function setupMisi3StepB() {
+            const stepB = document.getElementById('misi3-stepB');
+            stepB.classList.remove('hidden');
+
+            const optsB = document.getElementById('misi3-optionsB');
+            optsB.innerHTML = '';
+
+            const reasons = [
+                { text: "A. Membekalkan tenaga dan zat yang baik untuk badan.", correct: false },
+                { text: "B. Membantu menjaga kesihatan dan pertumbuhan diri.", correct: false },
+                { text: "C. Merupakan pilihan makanan yang lebih baik untuk tubuh.", correct: false },
+                { text: "D. Semua jawapan di atas adalah betul!", correct: true }
+            ];
+
+            reasons.forEach(r => {
+                const btn = document.createElement('button');
+                btn.className = 'misi3-optB-btn btn-game bg-white hover:bg-purple-50 border-2 border-purple-200 p-3 rounded-xl text-slate-800 font-bold text-xs sm:text-sm text-left transition';
+                btn.innerText = r.text;
+                btn.onclick = () => checkMisi3StepB(r, btn);
+                optsB.appendChild(btn);
+            });
+        }
+
+        function checkMisi3StepB(reason, btn) {
+            playSound('click');
+            const allBtns = document.querySelectorAll('.misi3-optB-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('misi3-feedback');
+            feedback.classList.remove('hidden');
+
+            if (reason.correct) {
+                playSound('correct');
+                updateScore(2); // Extra stars for KBAT reason
+                btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+
+                feedback.className = 'mt-4 p-4 rounded-2xl text-center font-bold text-sm sm:text-base bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerHTML = `👍 Bijak sekali! Kita perlu sentiasa membuat pilihan snek yang memberikan lebih banyak kebaikan kepada tubuh badan kita. (+2 ⭐)`;
+            } else {
+                playSound('wrong');
+                btn.classList.add('bg-amber-100', 'border-amber-400');
+
+                feedback.className = 'mt-4 p-4 rounded-2xl text-center font-bold text-sm sm:text-base bg-purple-100 text-purple-900 border-2 border-purple-300';
+                feedback.innerHTML = `💡 Sebenarnya, <b>Semua jawapan di atas adalah betul!</b> Snek berkhasiat memberikan pelbagai kebaikan untuk pertumbuhan badan.`;
+            }
+
+            document.getElementById('misi3-next-btn').classList.remove('hidden');
+        }
+
+        function finishMisi3() {
+            setupMisi4();
+            switchScreen('screen-misi4');
+        }
+
+        /* --- MISI 4 LOGIC --- */
+        function setupMisi4() {
+            misi4Questions = MISI4_BANK;
+            misi4Answers = {};
+
+            const container = document.getElementById('misi4-container');
+            container.innerHTML = '';
+
+            document.getElementById('misi4-feedback').classList.add('hidden');
+            document.getElementById('misi4-finish-btn').classList.add('hidden');
+
+            misi4Questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = 'bg-rose-50/80 border-2 border-rose-200 p-4 rounded-2xl';
+                card.innerHTML = `
+                    <p class="font-bold text-slate-800 text-sm sm:text-base mb-2 font-fun">
+                        ${idx + 1}. ${q.desc}
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="misi4-opts-${q.id}">
+                    </div>
+                `;
+                container.appendChild(card);
+
+                const optsContainer = card.querySelector(`#misi4-opts-${q.id}`);
+                const shuffledOpts = shuffleArray(q.options);
+
+                shuffledOpts.forEach(optText => {
+                    const btn = document.createElement('button');
+                    btn.className = `misi4-btn-${q.id} btn-game bg-white hover:bg-rose-100 border border-rose-200 p-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-700 transition text-center`;
+                    btn.innerText = optText;
+                    btn.onclick = () => selectMisi4Answer(q.id, optText, btn);
+                    optsContainer.appendChild(btn);
+                });
+            });
+        }
+
+        function selectMisi4Answer(qId, selectedText, clickedBtn) {
+            playSound('click');
+            const btns = document.querySelectorAll(`.misi4-btn-${qId}`);
+            btns.forEach(b => {
+                b.classList.remove('bg-rose-300', 'border-rose-500', 'text-rose-950');
+                b.classList.add('bg-white');
+            });
+
+            clickedBtn.classList.remove('bg-white');
+            clickedBtn.classList.add('bg-rose-300', 'border-rose-500', 'text-rose-950');
+
+            misi4Answers[qId] = selectedText;
+
+            // Check if all 3 answered
+            if (Object.keys(misi4Answers).length === misi4Questions.length) {
+                checkMisi4All();
+            }
+        }
+
+        function checkMisi4All() {
+            let correctCount = 0;
+
+            misi4Questions.forEach(q => {
+                const userAns = misi4Answers[q.id];
+                const btns = document.querySelectorAll(`.misi4-btn-${q.id}`);
+
+                btns.forEach(b => {
+                    b.disabled = true;
+                    if (b.innerText === q.correct) {
+                        b.classList.add('bg-emerald-200', 'border-emerald-500', 'text-emerald-950');
+                    } else if (b.innerText === userAns && userAns !== q.correct) {
+                        b.classList.add('bg-rose-200', 'border-rose-500', 'text-rose-950');
+                    }
+                });
+
+                if (userAns === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            updateScore(correctCount);
+
+            const feedback = document.getElementById('misi4-feedback');
+            feedback.classList.remove('hidden');
+
+            if (correctCount === 3) {
+                playSound('correct');
+                feedback.className = 'mt-4 p-4 rounded-2xl text-center font-bold text-sm sm:text-base bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerHTML = `🌟 Cemerlang! Anda berjaya padankan semua manfaat snek berkhasiat dengan tepat! (+3 ⭐)`;
+            } else {
+                playSound('correct');
+                feedback.className = 'mt-4 p-4 rounded-2xl text-center font-bold text-sm sm:text-base bg-amber-100 text-amber-900 border-2 border-amber-300';
+                feedback.innerHTML = `👍 Syabas atas usaha anda! Anda mendapat ${correctCount} daripada 3 padanan betul! (+${correctCount} ⭐)`;
+            }
+
+            document.getElementById('misi4-finish-btn').classList.remove('hidden');
+        }
+
+        /* --- RESULTS & RESTART --- */
+        function showResults() {
+            playSound('correct');
+            document.getElementById('final-score').innerText = totalScore;
+
+            const badgeEl = document.getElementById('final-badge');
+            if (totalScore >= 12) {
+                badgeEl.innerText = "🏆 JUARA SNEK SIHAT UTAMA!";
+            } else if (totalScore >= 8) {
+                badgeEl.innerText = "⭐ PAKAR PEMAKANAN MUDA!";
+            } else {
+                badgeEl.innerText = "🍎 PERWIRA SNEK BERKHASIAT!";
+            }
+
+            switchScreen('screen-results');
+        }
+
+        function restartGame() {
+            startGame();
+        }
+
+        // Initialize audio prompt on first user click anywhere
+        window.addEventListener('click', () => {
+            getAudioContext();
+        }, { once: true });
+    </script>
+</body>
+</html>
